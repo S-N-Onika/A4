@@ -36,4 +36,20 @@ function toggleStyle(id) {
     
     selected.classList.add('bg-[#3b5fea]' , 'text-[#ffffff]');
     selected.classList.remove('bg-[#ffffff]' , 'text-[#64748b]');
+
+
+    if (id == 'accept'){
+        all.classList.add('hidden');
+        hiddenSection.classList.remove('hidden')
+    }
+    else if (id == 'all'){
+        all.classList.remove('hidden');
+        hiddenSection.classList.add('hidden');
+    }
 }
+
+
+mainContainer.addEventListener('click', function (event) {
+    const parenNode = event.target.parentNode.parentNode;
+    const p
+})
