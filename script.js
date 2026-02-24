@@ -230,18 +230,6 @@ mainContainer.addEventListener('click', function (event) {
     }
 });
 
-// function updateJobCount() {
-//     if (currentStatus === 'all') {
-//         jobCount.innerText = allCardSection.children.length + " jobs";
-//     }
-//     else if (currentStatus === 'interview') {
-//         jobCount.innerText = interviewList.length + " jobs";
-//     }
-//     else if (currentStatus === 'rejected') {
-//         jobCount.innerText = rejectedList.length + " jobs";
-//     }
-// }
-
 
 function updateJobCount() {
 
@@ -251,7 +239,7 @@ function updateJobCount() {
     }
     else if (currentStatus === 'interview') {
 
-        jobCount.innerText = interviewList.length + " jobs";
+        jobCount.innerText = interviewList.length + " of 8 jobs";
 
         if (interviewList.length === 0) {
 
@@ -266,7 +254,7 @@ function updateJobCount() {
     }
     else if (currentStatus === 'rejected') {
 
-        jobCount.innerText = rejectedList.length + " jobs";
+        jobCount.innerText = rejectedList.length + " of 8 jobs";
 
         if (rejectedList.length === 0) {
 
