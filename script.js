@@ -1,6 +1,6 @@
 let interviewList = [];
 let rejectedList = [];
-let currentStatus = [];
+let currentStatus = 'all';
 
 let total = document.getElementById("total");
 let interviewCount = document.getElementById("interviewCount");
@@ -52,10 +52,10 @@ function toggleStyle(id) {
         allCardSection.classList.remove('hidden');
         hiddenSection.classList.add('hidden');
     }
-    else if (id = 'rejected') {
+    else if (id == 'rejected') {
         allCardSection.classList.add('hidden');
         hiddenSection.classList.remove('hidden');
-        
+
         renderRejected();
     }
 }
@@ -75,6 +75,8 @@ mainContainer.addEventListener('click', function (event) {
         const description = parenNode.querySelector('.description').innerText
 
         parenNode.querySelector('.status').innerText = 'Interview'
+        parenNode.querySelector('.status').className = 'status text-[#10b981] bg-[#ffffff] border border-[#10b981] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center';
+
 
         const cardInfo = {
             companyName,
@@ -94,7 +96,7 @@ mainContainer.addEventListener('click', function (event) {
         rejectedList = rejectedList.filter(item => item.companyName != cardInfo.companyName);
 
         if (currentStatus == 'interview') {
-            renderRejected()
+            renderInterview()
         }
 
         count();
@@ -110,6 +112,8 @@ mainContainer.addEventListener('click', function (event) {
         const description = parenNode.querySelector('.description').innerText
 
         parenNode.querySelector('.status').innerText = 'Rejected'
+        parenNode.querySelector('.status').className = 'status text-[#ef4444] bg-[#ffffff] border border-[#ef4444] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center';
+
 
         const cardInfo = {
             companyName,
@@ -129,7 +133,7 @@ mainContainer.addEventListener('click', function (event) {
         interviewList = interviewList.filter(item => item.companyName != cardInfo.companyName)
 
         if (currentStatus == "rejected") {
-            renderInterview();
+            renderRejected();
         }
 
         count();
@@ -199,3 +203,14 @@ function renderRejected() {
         hiddenSection.appendChild(div)
     }
 }
+
+
+mainContainer.addEventListener('click', function (event) {
+    if (event.target.classList.contains('trash')) {
+
+        const parenNode = event.target.parentNode.parentNode.parentNode;
+        parenNode.remove();
+
+        count();
+    }
+});
