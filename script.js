@@ -21,11 +21,8 @@ function count() {
     total.innerText = allCardSection.children.length
     interviewCount.innerText = interviewList.length
     rejectedCount.innerText = rejectedList.length
+
 }
-
-count();
-
-
 
 
 function toggleStyle(id) {
@@ -52,16 +49,21 @@ function toggleStyle(id) {
         hiddenSection.classList.remove('hidden')
 
         renderInterview();
+        updateJobCount();
     }
     else if (id === 'all') {
         allCardSection.classList.remove('hidden');
         hiddenSection.classList.add('hidden');
+
+        updateJobCount();
+        
     }
     else if (id === 'rejected') {
         allCardSection.classList.add('hidden');
         hiddenSection.classList.remove('hidden');
 
         renderRejected();
+        updateJobCount();
     }
 }
 
@@ -105,6 +107,7 @@ mainContainer.addEventListener('click', function (event) {
         }
 
         count();
+    
 
     }
     else if (event.target.classList.contains('rejectedBtn')) {
@@ -142,7 +145,6 @@ mainContainer.addEventListener('click', function (event) {
         }
 
         count();
-
     }
 })
 
@@ -163,7 +165,7 @@ function renderInterview() {
                 <p class="companyName text-lg text-[#002c5c]">${interviews.companyName}</p>
                 <p class="position text-[16px] text-[#64748b]">${interviews.position}</p>
                 <p class="type text-[#64748b] py-5">${interviews.type}</p>
-                <p class="status bg-[#eef4ffFF] text-[#002c5c] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center">${interviews.status}</p >
+                <p class="status bg-[#ffffff] text-[#10b981] border border-[#10b981] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center">${interviews.status}</p >
                 <P class="description text-[#323b49] text-[14px]">${interviews.description}</P>
             </div >
             <div class="flex gap-2 py-6">
@@ -172,7 +174,7 @@ function renderInterview() {
             </div>
         </div >
         <div>
-            <button class="cursor-pointer p-4"><i class="fa-regular fa-trash-can  border border-[#f1f2f4] rounded-full pr-6 pt-2 pb-2 pl-2" style="color: #64748b;"></i></button>
+            <button class="cursor-pointer p-4"><i class="trash fa-regular fa-trash-can  border border-[#f1f2f4] rounded-full pr-6 pt-2 pb-2 pl-2" style="color: #64748b;"></i></button>
         </div>
     `
         hiddenSection.appendChild(div)
@@ -193,7 +195,7 @@ function renderRejected() {
                 <p class="companyName text-lg text-[#002c5c]">${reject.companyName}</p>
                 <p class="position text-[16px] text-[#64748b]">${reject.position}</p>
                 <p class="type text-[#64748b] py-5">${reject.type}</p>
-                <p class="status bg-[#eef4ffFF] text-[#002c5c] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center">${reject.status}</p>
+                <p class="status bg-[#ffffff] text-[#ef4444] border border-[#ef4444] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center">${reject.status}</p>
                 <P class="description text-[#323b49] text-[14px]">${reject.description}</P>
             </div>
             <div class="flex gap-2 py-6">
@@ -202,7 +204,7 @@ function renderRejected() {
             </div>
         </div >
         <div>
-            <button class="cursor-pointer p-4"><i class="fa-regular fa-trash-can  border border-[#f1f2f4] rounded-full pr-6 pt-2 pb-2 pl-2" style="color: #64748b;"></i></button>
+            <button class="cursor-pointer p-4"><i class="trash fa-regular fa-trash-can  border border-[#f1f2f4] rounded-full pr-6 pt-2 pb-2 pl-2" style="color: #64748b;"></i></button>
         </div>
     `
         hiddenSection.appendChild(div)
@@ -227,3 +229,14 @@ mainContainer.addEventListener('click', function (event) {
     }
 });
 
+function updateJobCount() {
+    if (currentStatus === 'all') {
+        jobCount.innerText = allCardSection.children.length + " jobs";
+    }
+    else if (currentStatus === 'interview') {
+        jobCount.innerText = interviewList.length + " jobs";
+    }
+    else if (currentStatus === 'rejected') {
+        jobCount.innerText = rejectedList.length + " jobs";
+    }
+}
