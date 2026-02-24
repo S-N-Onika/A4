@@ -14,6 +14,8 @@ const all = document.getElementById('all')
 const interview = document.getElementById('interview')
 const rejected = document.getElementById('rejected')
 
+const jobCount = document.getElementById('jobCount');
+
 
 function count() {
     total.innerText = allCardSection.children.length
@@ -22,6 +24,9 @@ function count() {
 }
 
 count();
+
+
+
 
 function toggleStyle(id) {
     all.classList.remove('bg-[#3b5fea]', 'text-[#ffffff]');
@@ -42,17 +47,17 @@ function toggleStyle(id) {
     selected.classList.remove('bg-[#ffffff]', 'text-[#64748b]');
 
 
-    if (id == 'interview') {
+    if (id === 'interview') {
         allCardSection.classList.add('hidden');
         hiddenSection.classList.remove('hidden')
 
         renderInterview();
     }
-    else if (id == 'all') {
+    else if (id === 'all') {
         allCardSection.classList.remove('hidden');
         hiddenSection.classList.add('hidden');
     }
-    else if (id == 'rejected') {
+    else if (id === 'rejected') {
         allCardSection.classList.add('hidden');
         hiddenSection.classList.remove('hidden');
 
@@ -206,11 +211,19 @@ function renderRejected() {
 
 
 mainContainer.addEventListener('click', function (event) {
+
     if (event.target.classList.contains('trash')) {
 
         const parenNode = event.target.parentNode.parentNode.parentNode;
+        const companyName = parenNode.querySelector('.companyName').innerText;
+
         parenNode.remove();
+
+        interviewList = interviewList.filter(item => item.companyName !== companyName);
+
+        rejectedList = rejectedList.filter(item => item.companyName !== companyName);
 
         count();
     }
 });
+
