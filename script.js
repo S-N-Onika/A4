@@ -45,17 +45,19 @@ function toggleStyle(id) {
     if (id == 'interview') {
         allCardSection.classList.add('hidden');
         hiddenSection.classList.remove('hidden')
+
+        renderInterview();
     }
     else if (id == 'all') {
         allCardSection.classList.remove('hidden');
         hiddenSection.classList.add('hidden');
     }
-    else if (id = rejected) {
+    else if (id = 'rejected') {
         allCardSection.classList.add('hidden');
         hiddenSection.classList.remove('hidden');
+        
+        renderRejected();
     }
-
-    renderRejected()
 }
 
 
@@ -126,7 +128,7 @@ mainContainer.addEventListener('click', function (event) {
 
         interviewList = interviewList.filter(item => item.companyName != cardInfo.companyName)
 
-        if (currentStatus == "interview") {
+        if (currentStatus == "rejected") {
             renderInterview();
         }
 
@@ -152,7 +154,7 @@ function renderInterview() {
                 <p class="companyName text-lg text-[#002c5c]">${interviews.companyName}</p>
                 <p class="position text-[16px] text-[#64748b]">${interviews.position}</p>
                 <p class="type text-[#64748b] py-5">${interviews.type}</p>
-                <p class="status bg-[#eef4ffFF] text-[#002c5c] px-3 py-2 mt-3 mb-4 w-30 h-10">${interviews.status}</p >
+                <p class="status bg-[#eef4ffFF] text-[#002c5c] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center">${interviews.status}</p >
                 <P class="description text-[#323b49] text-[14px]">${interviews.description}</P>
             </div >
             <div class="flex gap-2 py-6">
@@ -177,12 +179,12 @@ function renderRejected() {
         let div = document.createElement('div');
         div.className = 'bg-[#ffffff] flex justify-between p-6'
         div.innerHTML = `
-        < div class="" >
+        <div class="">
             <div class="card-info">
                 <p class="companyName text-lg text-[#002c5c]">${reject.companyName}</p>
                 <p class="position text-[16px] text-[#64748b]">${reject.position}</p>
                 <p class="type text-[#64748b] py-5">${reject.type}</p>
-                <p class="status bg-[#eef4ffFF] text-[#002c5c] px-3 py-2 mt-3 mb-4 w-30 h-10">${reject.status}</p>
+                <p class="status bg-[#eef4ffFF] text-[#002c5c] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center">${reject.status}</p>
                 <P class="description text-[#323b49] text-[14px]">${reject.description}</P>
             </div>
             <div class="flex gap-2 py-6">
