@@ -31,9 +31,9 @@ function toggleStyle(id) {
     rejected.classList.remove('bg-[#3b5fea]', 'text-[#ffffff]');
 
 
-    all.classList.add('bg-[#ffffff]', 'text-[#64748b]');
-    interview.classList.add('bg-[#ffffff]', 'text-[#64748b]');
-    rejected.classList.add('bg-[#ffffff]', 'text-[#64748b]');
+    all.classList.add('bg-[#ffffff]', 'text-[#002c5c]');
+    interview.classList.add('bg-[#ffffff]', 'text-[#002c5c]');
+    rejected.classList.add('bg-[#ffffff]', 'text-[#002c5c]');
 
     const selected = document.getElementById(id);
 
@@ -41,7 +41,7 @@ function toggleStyle(id) {
     console.log(currentStatus);
 
     selected.classList.add('bg-[#3b5fea]', 'text-[#ffffff]');
-    selected.classList.remove('bg-[#ffffff]', 'text-[#64748b]');
+    selected.classList.remove('bg-[#ffffff]', 'text-[#002c5c]');
 
 
     if (id === 'interview') {
@@ -56,7 +56,7 @@ function toggleStyle(id) {
         hiddenSection.classList.add('hidden');
 
         updateJobCount();
-        
+
     }
     else if (id === 'rejected') {
         allCardSection.classList.add('hidden');
@@ -107,7 +107,7 @@ mainContainer.addEventListener('click', function (event) {
         }
 
         count();
-    
+
 
     }
     else if (event.target.classList.contains('rejectedBtn')) {
@@ -158,13 +158,13 @@ function renderInterview() {
         console.log(interviews);
 
         let div = document.createElement('div');
-        div.className = 'bg-[#ffffff] flex justify-between p-6'
+        div.className = 'bg-[#ffffff] flex justify-between p-6 w-auto cards'
         div.innerHTML = `
         <div class="">
             <div class="card-info">
                 <p class="companyName text-lg text-[#002c5c]">${interviews.companyName}</p>
-                <p class="position text-[16px] text-[#64748b]">${interviews.position}</p>
-                <p class="type text-[#64748b] py-5">${interviews.type}</p>
+                <p class="position text-[16px] text-[#002c5c]">${interviews.position}</p>
+                <p class="type text-[#002c5c] py-5">${interviews.type}</p>
                 <p class="status bg-[#ffffff] text-[#10b981] border border-[#10b981] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center">${interviews.status}</p >
                 <P class="description text-[#323b49] text-[14px]">${interviews.description}</P>
             </div >
@@ -174,7 +174,7 @@ function renderInterview() {
             </div>
         </div >
         <div>
-            <button class="cursor-pointer p-4"><i class="trash fa-regular fa-trash-can  border border-[#f1f2f4] rounded-full pr-6 pt-2 pb-2 pl-2" style="color: #64748b;"></i></button>
+            <button class="cursor-pointer p-4"><i class="trash fa-regular fa-trash-can  border border-[#f1f2f4] rounded-full pr-6 pt-2 pb-2 pl-2" style="color: #002c5c;"></i></button>
         </div>
     `
         hiddenSection.appendChild(div)
@@ -188,13 +188,13 @@ function renderRejected() {
     for (let reject of rejectedList) {
 
         let div = document.createElement('div');
-        div.className = 'bg-[#ffffff] flex justify-between p-6'
+        div.className = 'bg-[#ffffff] flex justify-between p-6 w-auto cards'
         div.innerHTML = `
         <div class="">
             <div class="card-info">
                 <p class="companyName text-lg text-[#002c5c]">${reject.companyName}</p>
-                <p class="position text-[16px] text-[#64748b]">${reject.position}</p>
-                <p class="type text-[#64748b] py-5">${reject.type}</p>
+                <p class="position text-[16px] text-[#002c5c]">${reject.position}</p>
+                <p class="type text-[#002c5c] py-5">${reject.type}</p>
                 <p class="status bg-[#ffffff] text-[#ef4444] border border-[#ef4444] px-3 py-2 mt-3 mb-4 w-30 h-10 text-center">${reject.status}</p>
                 <P class="description text-[#323b49] text-[14px]">${reject.description}</P>
             </div>
@@ -204,7 +204,7 @@ function renderRejected() {
             </div>
         </div >
         <div>
-            <button class="cursor-pointer p-4"><i class="trash fa-regular fa-trash-can  border border-[#f1f2f4] rounded-full pr-6 pt-2 pb-2 pl-2" style="color: #64748b;"></i></button>
+            <button class="cursor-pointer p-4"><i class="trash fa-regular fa-trash-can  border border-[#f1f2f4] rounded-full pr-6 pt-2 pb-2 pl-2" style="color: #002c5c;"></i></button>
         </div>
     `
         hiddenSection.appendChild(div)
@@ -226,17 +226,57 @@ mainContainer.addEventListener('click', function (event) {
         rejectedList = rejectedList.filter(item => item.companyName !== companyName);
 
         count();
+        updateJobCount();
     }
 });
 
+// function updateJobCount() {
+//     if (currentStatus === 'all') {
+//         jobCount.innerText = allCardSection.children.length + " jobs";
+//     }
+//     else if (currentStatus === 'interview') {
+//         jobCount.innerText = interviewList.length + " jobs";
+//     }
+//     else if (currentStatus === 'rejected') {
+//         jobCount.innerText = rejectedList.length + " jobs";
+//     }
+// }
+
+
 function updateJobCount() {
+
     if (currentStatus === 'all') {
+
         jobCount.innerText = allCardSection.children.length + " jobs";
     }
     else if (currentStatus === 'interview') {
+
         jobCount.innerText = interviewList.length + " jobs";
+
+        if (interviewList.length === 0) {
+
+            hiddenSection.innerHTML = `
+                <div class="text-center py-25">
+                    <img class = "mx-auto" src="jobs.png" alt="">
+                    <p class="text-[#002c5c] font-semibold text-[24px] mt-4">No jobs available</p>
+                    <p class="text-[16px] text-[#64748b]">Check back soon for new job opportunities</p>
+                </div>
+            `;
+        }
     }
     else if (currentStatus === 'rejected') {
+
         jobCount.innerText = rejectedList.length + " jobs";
+
+        if (rejectedList.length === 0) {
+
+            hiddenSection.innerHTML = `
+                <div class="text-center py-25">
+                    <img class = "mx-auto" src="jobs.png" alt="">
+                    <p class="text-[#002c5c] font-semibold text-[24px] mt-4">No jobs available</p>
+                    <p class="text-[16px] text-[#64748b]">Check back soon for new job opportunities</p>
+                </div>
+            `;
+        }
     }
 }
